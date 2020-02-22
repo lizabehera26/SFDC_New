@@ -921,7 +921,7 @@ public static void TC_35_RandomScenarios_3() throws InterruptedException{
 		else
 			logger.log(LogStatus.FAIL, "AllTab  is not Launched");
 		
-		Thread.sleep(5000);
+		Thread.sleep(3000);
 		
 		 WebElement CustomizeMyTabs = driver.findElement(By.xpath("//*[@id='AllTab_Tab']/a/img"));
 		 Click(CustomizeMyTabs,"AllTab");
