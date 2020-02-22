@@ -924,8 +924,9 @@ public static void TC_35_RandomScenarios_3() throws InterruptedException{
 		Thread.sleep(4000);
 		
 		 WebElement CustomizeMyTabs = driver.findElement(By.xpath("//*[@id='AllTab_Tab']/a/img"));
-		 Click(CustomizeMyTabs,"AllTab_Tab");
+		 Click(CustomizeMyTabs,"AllTab");
 	
 		
  }
+
 }
