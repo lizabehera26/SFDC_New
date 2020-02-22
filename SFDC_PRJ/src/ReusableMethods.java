@@ -21,6 +21,7 @@ public class ReusableMethods {
 	public static void InitializeDriver() {
 		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver();
+		System.out.println("Comment for Reusable");
 	}
 
 	public static void OpenUrl(String url) {
