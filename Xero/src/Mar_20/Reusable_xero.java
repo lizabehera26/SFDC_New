@@ -1,7 +1,9 @@
 package Mar_20;
 
+import java.io.FileInputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,12 +19,16 @@ public class Reusable_xero {
 	static ExtentReports report;
 	static ExtentTest logger ;
 	static WebDriver driver ;
+	//Properties obj = new Properties();
+	//FileInputStream objfile = new FileInputStream(System.getProperty("user.dir"+"C:\\SFDC_New\\Xero\\Xero_app.properties"));
 	
 	public static void DriverInitialization(String browser) throws Exception {
+		Properties obj = new Properties();
+		FileInputStream objfile = new FileInputStream(System.getProperty("C:\\chromedriver.exe")+("C:\\SFDC_New\\Xero\\Xero_app.properties"));
 		
 		if(browser.equalsIgnoreCase("chrome")){
 			//set path to chromedriver.exe
-			System.setProperty("webdriver.chrome.driver",".\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver","C:\\chromedriver.exe");
 			driver = new ChromeDriver();
 		}
 		else if(browser.equalsIgnoreCase("iexplorer")){
