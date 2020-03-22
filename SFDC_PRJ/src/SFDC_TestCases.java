@@ -20,12 +20,12 @@ public class SFDC_TestCases extends ReusableMethods {
 	public static void main(String[] args) throws InterruptedException {
 		InitializeDriver();
 		CreateReport();
-		//TC_1_LoginErrorMessage();
-		//TC_3_LoginToSalesForce2();
+		TC_1_LoginErrorMessage();
+		//TC_3_Rememberme();
 		
 		//TC_4A_ForgotPassword();
 		//TC_4B_ForgotPassword();
-		LoginToSalesforce();
+		//LoginToSalesforce();
 		//TC_5_UserNameDropdown();
 		//TC_7_MySettings();
 		//TC_8_DeveloperConsole();
@@ -54,6 +54,7 @@ public class SFDC_TestCases extends ReusableMethods {
 		  //TC_32_Check_Save_Btn();
 		  TC_33_RandomScenarios_1() ;
 		  //TC_34_RandomScenarios_2();
+		  TC_35_RandomScenarios_3();
 		  
 		
  	   // TC_2_LoginToSalesForce();
@@ -111,7 +112,7 @@ public class SFDC_TestCases extends ReusableMethods {
 
 	}
 	public static void TC_2_LoginToSalesForce() {
-		logger = report.startTest("111111TC_2_LoginToSalesForce");
+		logger = report.startTest("TC_2_LoginToSalesForce");
 
 		OpenUrl("https://login.salesforce.com");
 		logger.log(LogStatus.INFO, "URL opened successfully");
@@ -158,7 +159,7 @@ public class SFDC_TestCases extends ReusableMethods {
 			logger.log(LogStatus.FAIL, "home page is not Lunched");
 		// System.out.println("home page is not Lunched");
 	}
-	public static void TC_3_LoginToSalesForce2() throws InterruptedException {
+	public static void TC_3_Rememberme() throws InterruptedException {
 		
 		OpenUrl("https://login.salesforce.com");
 		WebElement Uname = driver.findElement(By.xpath("//*[@id=\"username\"]"));
@@ -457,7 +458,7 @@ public class SFDC_TestCases extends ReusableMethods {
 		Click(FindBtn,"stageForm");
 		Thread.sleep(3000);
 		
-		List <WebElement> checkBoxes =driver.findElements(By.xpath("//*[@id=\"cid0\"]"));
+		List <WebElement> checkBoxes =driver.findElements(By.xpath("//*[@id='cid0']"));
 		   for(int i=0; i<2; i++){
 		    checkBoxes.get(i).click();
 		    }
@@ -923,10 +924,20 @@ public static void TC_35_RandomScenarios_3() throws InterruptedException{
 		
 		Thread.sleep(3000);
 		
-		 WebElement CustomizeMyTabs = driver.findElement(By.xpath("//*[@id='AllTab_Tab']/a/img"));
-		 Click(CustomizeMyTabs,"AllTab");
+	WebElement CustomizeMyTabs = driver.findElement(By.xpath("//input[@name='customize']"));
+	Click(CustomizeMyTabs,"AllTab");
+    WebElement Selectedtab = driver.findElement(By.xpath("//select[@name='duel_select_1']"));
+    List<WebElement> we = 	Selectedtab.findElements(By.xpath("//option[@value='Leads']"));
+    WebElement Removetab = driver.findElement(By.xpath("//img[@class='leftArrowIcon']"));
+	Click(Removetab,"leftArrowIcon");
+	WebElement SaveBtn = driver.findElement(By.xpath("//input[@name='save']"));
+	Click(SaveBtn,"save");
 	
-		
- }
+	WebElement Userdropdown= driver.findElement(By.xpath("//*[@id=\"userNavLabel\"]"));
+	Userdropdown.click();
+	
+	WebElement LogoutBtn = driver.findElement(By.xpath("//a[contains(text(),'Logout')]"));
+	Click(LogoutBtn,"Logout");
+	 }
 
 }
