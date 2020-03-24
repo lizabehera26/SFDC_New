@@ -19,16 +19,18 @@ public class Reusable_xero {
 	static ExtentReports report;
 	static ExtentTest logger ;
 	static WebDriver driver ;
-	//Properties obj = new Properties();
-	//FileInputStream objfile = new FileInputStream(System.getProperty("user.dir"+"C:\\SFDC_New\\Xero\\Xero_app.properties"));
-	
+
+
 	public static void DriverInitialization(String browser) throws Exception {
 		Properties obj = new Properties();
-		FileInputStream objfile = new FileInputStream(System.getProperty("C:\\chromedriver.exe")+("C:\\SFDC_New\\Xero\\Xero_app.properties"));
+		FileInputStream objfile = new FileInputStream("C:\\\\SFDC_New\\\\Xero\\\\Xero_app.properties");
 		
+		obj.load(objfile);
+		String path = obj.getProperty("ChromeDriver_Path");
+				
 		if(browser.equalsIgnoreCase("chrome")){
 			//set path to chromedriver.exe
-			System.setProperty("webdriver.chrome.driver","C:\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", path);
 			driver = new ChromeDriver();
 		}
 		else if(browser.equalsIgnoreCase("iexplorer")){
@@ -65,7 +67,7 @@ public class Reusable_xero {
 	}
 
 		public static void CreateReport() {
-			String fileName = new SimpleDateFormat("'Xero_Report_'YYYYMMddHHmm'.html'").format(new Date());
+			String fileName = new SimpleDateFormat("'XReport_'YYYYMMddHHmm'.html'").format(new Date());
 			String path = "C:\\Xero_Report\\" + fileName;
 			report = new ExtentReports(path);
 		}
