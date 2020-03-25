@@ -62,7 +62,7 @@ public class xero_app extends Reusable_xero {
 
 	@Test
 	public static void TC1_login() throws Exception  {
-		//Front page to Login
+		//Front page to go to Login page
 		logger = report.startTest("TC1_login");
 		WebElement loginlink =driver.findElement(By.linkText("Login"));
 		loginlink.click();
@@ -91,17 +91,62 @@ public class xero_app extends Reusable_xero {
 	   System.out.println("Title Matched,Xero application homepage is displayed");
 	   else
 	   System.out.println("Title didn't match,Xero application homepage is not displayed");
+	      	
+	   //TC4_Logout();
 	   
+	   //Edit Profile Test Case
+	   /*
+	    WebElement Editprofile = driver.findElement(By.xpath("//li[@class='xrh-addon xrh-addon-lastvisible xrh-addon-hidden']//button[@type='button']"));
+   	
+		Select select = new Select(Editprofile);
+		select.selectByVisibleText("Swagatika Joshi");
+		driver.manage().timeouts().implicitlyWait(40,TimeUnit.SECONDS);
+		String profilepage = driver.getTitle();
+		Assert.assertEquals(profilepage,"My Xero | Profile Settings");
+		
+		WebElement UploadImg = driver.findElement(By.id("button-1041-btnInnerEl"));
+		UploadImg.click();
+		WebElement frame = driver.switchTo().activeElement();
+		frame.sendKeys("C:\\Users\\Public\\Pictures\\Sample Pictures");
+		WebElement Upload = driver.findElement(By.id("button-1192-btnInnerEl"));
+		Upload.click();
+		System.out.println("Uploaded image is displayed");
+		Thread.sleep(5000);
+   	
+	   */
 	   //CloseBrowser();
 	   
 	   }
   
-   /* @Test
+ @Test(dependsOnMethods={"TC1_login"})
+ public static void TC4_Logout() {
+     
+    driver.manage().timeouts().implicitlyWait(40,TimeUnit.SECONDS);
+   
+    logger = report.startTest("TC4_Logout");
+ 	
+ 	WebElement Editprofile = driver.findElement(By.xpath("//*[@id='header']/header/div/ol[2]/li[5]/button/div/img"));
+ 	Editprofile.click();
+ 	
+ 	WebElement Lout = driver.findElement(By.xpath("//*[@id='header']/header/div/ol[2]/li[5]/div/div[2]/div/ol/li[5]/a"));
+ 	Lout.click();
+ 	driver.manage().timeouts().implicitlyWait(40,TimeUnit.SECONDS);
+ 	
+ 	////*[@id="header"]/header/div/ol[2]/li[6]/div/div[2]/div/ol/li[7]/a
+ 	//Select select = new Select(Editprofile);
+ 	//select.selectByVisibleText("Log out");
+ 	//String logoutpage = driver.getTitle();
+ 	//Assert.assertEquals(logoutpage,"Login | Xero Accounting Software");
+ 	
+     }
+	 
+	 
+    @Test
     public static void TC1_IncorrectPwd() throws Exception {
       
   	   logger = report.startTest("TC1_IncorrectPwd");
   	   
-  	   WebElement loginlink =driver.findElement(By.linkText("Login"));
+  	    WebElement loginlink =driver.findElement(By.linkText("Login"));
 		loginlink.click();
 		String pageTitle = driver.getTitle();
 		System.out.println(pageTitle);
@@ -137,7 +182,7 @@ public class xero_app extends Reusable_xero {
     @Test
     public static void TC1_IncorrectEmail() throws Exception {
     	
-   	   logger = report.startTest("TC1_IncorrectEmail");
+   	    logger = report.startTest("TC1_IncorrectEmail");
 		WebElement loginlink =driver.findElement(By.linkText("Login"));
 		loginlink.click();
 		String pageTitle = driver.getTitle();
@@ -169,8 +214,8 @@ public class xero_app extends Reusable_xero {
  	  driver.manage().timeouts().implicitlyWait(40,TimeUnit.SECONDS);
  	   
  	 //CloseBrowser();  
- 	 }*/
-   
+ 	 }
+    @Test
     public static void TC1_ForgotPwd() {
 	    logger = report.startTest("TC1_ForgotPwd");
 	    WebElement loginlink =driver.findElement(By.linkText("Login"));
@@ -182,30 +227,30 @@ public class xero_app extends Reusable_xero {
 	    WebElement ForgotPwd = 	driver.findElement(By.xpath("//a[@href='/ForgottenPassword']"));
 	    ForgotPwd.click();
 	    driver.manage().timeouts().implicitlyWait(40,TimeUnit.SECONDS);
-	     String actualTitle2 = driver.getTitle();
-	     String expectedTitle2 = "Forgotten Password";
-	     if(actualTitle2.equalsIgnoreCase(expectedTitle2))
-	     {
-	    	   System.out.println("Forgotten password page is displayed ");
-	     }
+		 String actualTitle2 = driver.getTitle();
+		 String expectedTitle2 = "Forgotten Password";
+		 if(actualTitle2.equalsIgnoreCase(expectedTitle2))
+		 {
+			   System.out.println("Forgotten password page is displayed ");
+		 }
 		   else
 		   {
 		   System.out.println("Forgotten password page is not displayed");
 		   }
-	     
+		 
 	     WebElement UN = driver.findElement(By.id("email"));
 		 VisibleSelected(UN,"UserName");
 		 EnterText(UN,"lizabehera26@@gmail.com","UserName");
 		 WebElement sendlink = driver.findElement(By.xpath("//a[@href='#']"));
 		 sendlink.click();
 		 
-		//CloseBrowser();   
+		  
     }
    
     
     //Sign up to Free Trial Account
    
-     
+     @Test
     public static void TC2_SignUptoXDC() {
     	
     	logger = report.startTest("TC2_SignUptoXDC");
@@ -259,9 +304,9 @@ public class xero_app extends Reusable_xero {
 	     
 	     
 	       }
-     
+     @Test
      public static void TC2B_SignUptoXDC() {
-    	logger = report.startTest("TC2B_SignUptoXDC");
+        logger = report.startTest("TC2B_SignUptoXDC");
     	WebElement Freetrial = driver.findElement(By.linkText("Free trial")) ;
      	Freetrial.click();
      	String actualTitle3 = driver.getTitle();
@@ -274,6 +319,7 @@ public class xero_app extends Reusable_xero {
  		   {
  		   System.out.println("Free trial page is not displayed");
  		   }
+ 	     
  	  WebElement getstartbtn = driver.findElement(By.className("g-recaptcha-submit"));
 	  getstartbtn.click();
 	  String Errormsg = driver.findElement(By.id("signup-form-error-message-1")).getText();
@@ -305,65 +351,65 @@ public class xero_app extends Reusable_xero {
      
      
   }
-      
-    	public static void TC2C_SignUptoXDC() {
+     @Test 
+    public static void TC2C_SignUptoXDC() {
     		
-    		logger = report.startTest("TC2C_SignUptoXDC");
-    		//go to free trial page
-    		WebElement Freetrial = driver.findElement(By.linkText("Free trial")) ;
-         	Freetrial.click();
-         	String actualTitle3 = driver.getTitle();
-     	    String expectedTitle3 = "Signup for Xero - Free Trial | Xero US";
-     	     if(actualTitle3.equalsIgnoreCase(expectedTitle3))
-     	     {
-     	    	   System.out.println("Free trial page is displayed ");
-     	     }
-     		   else
-     		   {
-     		   System.out.println("Free trial page is not displayed");
-     		   }
-     	     //click on terms link
-    		WebElement terms = driver .findElement(By.xpath("//a[@href='https://www.xero.com/us/about/terms/']"));
-    		terms.click();
-    		String oldwindow = driver.getWindowHandle();
-    		//Set<String> getAllWindows = driver.getWindowHandles();
-    		//String[] getWindow = getAllWindows.toArray(new String[getAllWindows.size()]);
-    		//driver.switchTo().window(getWindow[1]);
-    		System.out.println(driver.getCurrentUrl());
-    		driver.manage().timeouts().implicitlyWait(40,TimeUnit.SECONDS);
-    		
-    		//come back to free trial page and click on privacy link
-    		driver.switchTo().window(oldwindow);
-    		WebElement privacy = driver.findElement(By.xpath("//a[@href='https://www.xero.com/us/about/privacy/']"));
-    		privacy.click();
-    		String newwindow =driver.getWindowHandle();
-    		driver.switchTo().window(newwindow);
-    		driver.manage().timeouts().implicitlyWait(40,TimeUnit.SECONDS);
-    		//driver.switchTo().window(getWindow[2]);
-    		System.out.println(driver.getCurrentUrl());
-    		
-    		// Testing of offer details link(TC-2D)
-    		 driver.switchTo().window(oldwindow);
-    		 
-    		 WebElement offers = driver.findElement(By.xpath("//a[@href='https://www.xero.com/us/signup/offer-details/']"));
-	 	     offers.click();
-	 	     String freshwindow = driver.getWindowHandle();
-	 	     driver.switchTo().window(freshwindow);
-	 	     //driver.switchTo().window(getWindow[3]);
-	 	     System.out.println(driver.getCurrentUrl());
-	 	     
-	 	     
-	 	    //Click on accountant or bookeeper link (TC-2E)
-	 	     
-	 	    WebElement accountant = driver.findElement(By.linkText("accountant or bookkeeper"));
-	 	    accountant.click();
-	 	    String realTitle = driver.getTitle();
-	 	    Assert.assertEquals(realTitle,"Sign up for the Xero Partner Program | Xero US");
-	 	    
-	 	    
-	   }
+		logger = report.startTest("TC2C_SignUptoXDC");
+		//go to free trial page
+		WebElement Freetrial = driver.findElement(By.linkText("Free trial")) ;
+     	Freetrial.click();
+     	String actualTitle3 = driver.getTitle();
+ 	    String expectedTitle3 = "Signup for Xero - Free Trial | Xero US";
+ 	     if(actualTitle3.equalsIgnoreCase(expectedTitle3))
+ 	     {
+ 	    	   System.out.println("Free trial page is displayed ");
+ 	     }
+ 		   else
+ 		   {
+ 		   System.out.println("Free trial page is not displayed");
+ 		   }
+ 	     //click on terms link
+		WebElement terms = driver .findElement(By.xpath("//a[@href='https://www.xero.com/us/about/terms/']"));
+		terms.click();
+		String oldwindow = driver.getWindowHandle();
+		//Set<String> getAllWindows = driver.getWindowHandles();
+		//String[] getWindow = getAllWindows.toArray(new String[getAllWindows.size()]);
+		//driver.switchTo().window(getWindow[1]);
+		System.out.println(driver.getCurrentUrl());
+		driver.manage().timeouts().implicitlyWait(40,TimeUnit.SECONDS);
+		
+		//come back to free trial page and click on privacy link
+		driver.switchTo().window(oldwindow);
+		WebElement privacy = driver.findElement(By.xpath("//a[@href='https://www.xero.com/us/about/privacy/']"));
+		privacy.click();
+		String newwindow =driver.getWindowHandle();
+		driver.switchTo().window(newwindow);
+		driver.manage().timeouts().implicitlyWait(40,TimeUnit.SECONDS);
+		//driver.switchTo().window(getWindow[2]);
+		System.out.println(driver.getCurrentUrl());
+		
+		// Testing of offer details link(TC-2D)
+		 driver.switchTo().window(oldwindow);
+		 
+		 WebElement offers = driver.findElement(By.xpath("//a[@href='https://www.xero.com/us/signup/offer-details/']"));
+ 	     offers.click();
+ 	     String freshwindow = driver.getWindowHandle();
+ 	     driver.switchTo().window(freshwindow);
+ 	     //driver.switchTo().window(getWindow[3]);
+ 	     System.out.println(driver.getCurrentUrl());
+ 	     
+ 	     
+ 	    //Click on accountant or bookeeper link (TC-2E)
+ 	     
+ 	    WebElement accountant = driver.findElement(By.xpath("/html/body/div[4]/main/div[2]/div/div/div/p/a"));
+ 	    accountant.click();
+ 	    String realTitle = driver.getTitle();
+ 	    Assert.assertEquals(realTitle,"Sign up for the Xero Partner Program | Xero US");
+ 	    
+ 	    
+   }
         
-        @Test(dependsOnMethods= "TC1_login")
+        @Test(dependsOnMethods= {"TC1_login"})
         public static void TC3_Testalltabs() throws InterruptedException{
         	
         logger = report.startTest("TC3_Testalltabs");
@@ -418,41 +464,28 @@ public class xero_app extends Reusable_xero {
    	   helpbtn.click();
    	 
        }
-        @Test(dependsOnMethods="TC1_login")
-        public static void TC4_Logout() {
-        	logger = report.startTest("TC4_Logout");
-        	WebElement Editprofile = driver.findElement(By.xpath("//*[contains(@title,'User Info')]"));
-        	driver.manage().timeouts().implicitlyWait(40,TimeUnit.SECONDS);
-        	Select select = new Select(Editprofile);
-        	select.selectByVisibleText("Log out");
-        	String logoutpage = driver.getTitle();
-        	Assert.assertEquals(logoutpage,"Login | Xero Accounting Software");
-        	
-        }
        
+       @Test
         public static void TC6_Profile() throws InterruptedException {
         	
         logger = report.startTest("TC6_Profile");
-        WebElement Editprofile = driver.findElement(By.xpath("//*[contains(@title,'User Info')]"));
-    	
-    	Select select = new Select(Editprofile);
-    	select.selectByVisibleText("Swagatika Joshi");
+        WebElement Editprofile = driver.findElement(By.xpath("//*[@id='header']/header/div/ol[2]/li[5]/button/div/img"));
+     	Editprofile.click();
     	driver.manage().timeouts().implicitlyWait(40,TimeUnit.SECONDS);
-    	String profilepage = driver.getTitle();
-    	Assert.assertEquals(profilepage,"My Xero | Profile Settings");
     	
-    	WebElement UploadImg = driver.findElement(By.id("button-1041-btnInnerEl"));
+    	WebElement User = driver.findElement(By.xpath("//*[@id='header']/header/div/ol[2]/li[5]/div/div[2]/div/ol/li[1]/a"));
+    	User.click();
+    	WebElement UploadImg = driver.findElement(By.xpath("//*[@id='button-1041-btnInnerEl']"));
     	UploadImg.click();
+    	
     	WebElement frame = driver.switchTo().activeElement();
     	frame.sendKeys("C:\\Users\\Public\\Pictures\\Sample Pictures");
-    	WebElement Upload = driver.findElement(By.id("button-1192-btnInnerEl"));
+    	WebElement Upload = driver.findElement(By.xpath("//*[@id='button-1178-btnInnerEl']"));
     	Upload.click();
+    	System.out.println("Uploaded image is displayed");
     	Thread.sleep(5000);
     	
-    	
-       
-        	
-        }
+     }
         
         
     	
